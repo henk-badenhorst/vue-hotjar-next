@@ -2,10 +2,17 @@
   "name": "vue-hotjar-next",
   "version": "1.0.0",
   "description": "Vue 3 Hotjar plugin",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --watch --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Test\" && exit 1",
+    "lint": "eslint . --ext .ts"
   },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/henk-badenhorst/vue-hotjar-next.git"
@@ -26,5 +33,14 @@
     "email": "hello@henk.io",
     "url": "https://henk.io"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "eslint": "^7.22.0",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "webpack": "^5.25.1",
+    "webpack-cli": "^4.5.0"
+  }
 }
