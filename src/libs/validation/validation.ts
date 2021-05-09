@@ -46,3 +46,14 @@ export function validateHotjarOptions(options: hotjarOptions): Promise<boolean> 
     })
   })
 }
+
+export function validateVueVersion(version: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    if(version[0] === '3') {
+      resolve(true)
+    } else {
+      console.error(`This plugin detected Vue version ${version} but requires Vue 3.x.x`)
+      reject(false)
+    }
+  })
+} 

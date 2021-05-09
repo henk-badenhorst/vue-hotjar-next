@@ -3,10 +3,13 @@
     "noImplicitAny": true,
     "strict": true,
     "allowJs": false,
+    "moduleResolution":"Node",
     "rootDir": "./",
     "outDir": "./dist/",
     "module": "ES6",
-    "target": "ES2015",
-    "lib": [ "ES2015", "DOM" ]
-  }
+    "target": "ES5",
+    "lib": [ "ES5", "DOM" ]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
