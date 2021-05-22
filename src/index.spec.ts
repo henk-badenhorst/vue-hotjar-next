@@ -1,6 +1,6 @@
-import { createApp } from 'vue'
-import Hotjar from './index'
-import { hotjarOptions } from './types/typing'
+import { createApp } from 'vue';
+import Hotjar from './index';
+import { hotjarOptions } from './types/typing';
 
 declare global {
   interface Window {
@@ -8,52 +8,56 @@ declare global {
   }
 }
 
-function newVueApplication (options: hotjarOptions) {
-  return createApp({}).use(Hotjar, options).mount
+function newVueApplication(options: hotjarOptions) {
+  return createApp({}).use(Hotjar, options).mount;
 }
 
 describe('Hotjar initialization', () => {
-  
   beforeEach(() => {
     spyOn(console, 'log');
     spyOn(console, 'error');
-  })
+  });
 
   afterEach(() => {
-    jest.resetAllMocks()
-    delete window._hjSettings
-  })
+    jest.resetAllMocks();
+    delete window._hjSettings;
+  });
 
   describe('Hotjar Production Mode', () => {
     it('Hotjar should not be initialized', () => {
-      newVueApplication({id: 12345678, snippetVersion: 6, isProduction: true })
-      console.log(window._hjSettings)
-      expect(window._hjSettings.hjid).toBe(12345678)
-      expect(window._hjSettings.hjsv).toBe(6)
-    })
+      newVueApplication({
+        id: 12345678,
+        snippetVersion: 6,
+        isProduction: true
+      });
+      console.log(window._hjSettings);
+      expect(window._hjSettings.hjid).toBe(12345678);
+      expect(window._hjSettings.hjsv).toBe(6);
+    });
 
     it('Hotjar should default to production mode', () => {
-      newVueApplication({id: 123456781, snippetVersion: 6})
-      expect(window._hjSettings).toBeDefined()
-    })
-  })
+      newVueApplication({ id: 123456781, snippetVersion: 6 });
+      expect(window._hjSettings).toBeDefined();
+    });
+  });
 
   describe('Hotjar Development Mode', () => {
     afterEach(() => {
-      jest.resetAllMocks()
-      delete window._hjSettings
-    })
+      jest.resetAllMocks();
+      delete window._hjSettings;
+    });
 
     it('Hotjar should not be initialized', () => {
-      newVueApplication({id: 12345678, snippetVersion: 6, isProduction: false })
-      expect(window._hjSettings).not.toBeDefined()
-      expect(console.log).toHaveBeenCalledWith('%c 🔥 HotJar Tracking Disabled 🔥', 'color: #fff; background: #35495d; font-size: 14px; border-radius: 5px; padding: 10px 5px; margin: 20px 0;')
-    })
-  })
-})
-
-
-
-
-
-
+      newVueApplication({
+        id: 12345678,
+        snippetVersion: 6,
+        isProduction: false
+      });
+      expect(window._hjSettings).not.toBeDefined();
+      expect(console.log).toHaveBeenCalledWith(
+        '%c 🔥 HotJar Tracking Disabled 🔥',
+        'color: #fff; background: #35495d; font-size: 14px; border-radius: 5px; padding: 10px 5px; margin: 20px 0;'
+      );
+    });
+  });
+});

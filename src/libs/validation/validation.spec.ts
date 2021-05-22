@@ -1,62 +1,71 @@
 import * as validation from './validation';
-import { hotjarOptions } from '../../types/typing'
+import { hotjarOptions } from '../../types/typing';
 
 describe('HotJar Options Validation', () => {
-
   describe('id property', () => {
     it('ID should be valid', async () => {
-      await expect(validation.id(11111)).resolves.toEqual('valid')
-    })
+      await expect(validation.id(11111)).resolves.toEqual('valid');
+    });
     it('ID should not be valid', async () => {
-      await expect(validation.id('11111')).rejects.toEqual('Hotjar option site id is of type string and should a number')
-    })
+      await expect(validation.id('11111')).rejects.toEqual(
+        'Hotjar option site id is of type string and should a number'
+      );
+    });
     it('ID is not defined', async () => {
-      await expect(validation.id(undefined)).rejects.toEqual('Hotjar Tracking ID is not defined')
-    })
-  })
+      await expect(validation.id(undefined)).rejects.toEqual(
+        'Hotjar Tracking ID is not defined'
+      );
+    });
+  });
 
   describe('idProduction property', () => {
     it('idProduction should be valid', async () => {
-      await expect(validation.isProduction(true)).resolves.toEqual('valid')
-    })
+      await expect(validation.isProduction(true)).resolves.toEqual('valid');
+    });
     it('idProduction should not be valid due to incorrect type', async () => {
-      await expect(validation.isProduction('production')).rejects.toEqual('Hotjar option isProduction is of type string and should a boolean')
-    })
-  })
+      await expect(validation.isProduction('production')).rejects.toEqual(
+        'Hotjar option isProduction is of type string and should a boolean'
+      );
+    });
+  });
 
   describe('snippetVersion property', () => {
     it('snippetVersion should be valid', async () => {
-      await expect(validation.snippetVersion(6)).resolves.toEqual('valid')
-    })
+      await expect(validation.snippetVersion(6)).resolves.toEqual('valid');
+    });
     it('snippetVersion should not be valid due to incorrect type', async () => {
-      await expect(validation.snippetVersion('6')).rejects.toEqual('Hotjar option snippetVersion is of type string and should a number')
-    })
-  })
-})
-
+      await expect(validation.snippetVersion('6')).rejects.toEqual(
+        'Hotjar option snippetVersion is of type string and should a number'
+      );
+    });
+  });
+});
 
 describe('HotJar Validator', () => {
-
   beforeEach(() => {
     spyOn(console, 'error');
-  })
+  });
 
   it('should ve valid', async () => {
     const hotjarOptions: hotjarOptions = {
       id: 11111,
       isProduction: true
-    }
-    await expect(validation.validateHotjarOptions(hotjarOptions)).resolves.toEqual(true)
-    })
+    };
+    await expect(
+      validation.validateHotjarOptions(hotjarOptions)
+    ).resolves.toEqual(true);
+  });
 
   it('should throw an error', async () => {
     // type set to any to test incorrect id
     const hotjarOptions: any = {
       id: '11111',
       isProduction: true
-    }
-    await expect(validation.validateHotjarOptions(hotjarOptions)).rejects.toEqual(false).then(() => {
-      expect(console.error).toHaveBeenCalledTimes(1)
-    })
-  })
-})
+    };
+    await expect(validation.validateHotjarOptions(hotjarOptions))
+      .rejects.toEqual(false)
+      .then(() => {
+        expect(console.error).toHaveBeenCalledTimes(1);
+      });
+  });
+});

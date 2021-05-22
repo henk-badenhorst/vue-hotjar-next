@@ -8,14 +8,14 @@ module.exports = {
       {
         test: /\.ts?$/,
         use: 'ts-loader'
-      },
-    ],
+      }
+    ]
   },
   resolve: {
-    extensions: [ '.ts' ],
+    extensions: ['.ts']
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   }
 };

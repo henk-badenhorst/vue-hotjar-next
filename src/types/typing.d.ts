@@ -16,5 +16,5 @@ export interface hotjarOptions {
    * If you want to change the snippet version you can specify the specific version number.
    * @Default 6
    */
-   snippetVersion?: number;
+  snippetVersion?: number;
 }

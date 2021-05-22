@@ -1,5 +1,5 @@
 // jest.config.ts
-import type { Config } from '@jest/types'
+import type { Config } from '@jest/types';
 
 // Or async function
 export default async (): Promise<Config.InitialOptions> => {
@@ -10,6 +10,6 @@ export default async (): Promise<Config.InitialOptions> => {
     transform: {
       '^.+\\.ts?$': 'ts-jest'
     },
-    verbose: true,
+    verbose: true
   };
 };
