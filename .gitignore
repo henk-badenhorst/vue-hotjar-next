@@ -16,3 +16,6 @@ Thumbs.db
 # Editor directories and files
 .idea
 .vscode
+
+# Husky - pre-commit
+.husky/_
