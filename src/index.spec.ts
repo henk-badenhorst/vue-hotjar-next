@@ -1,4 +1,4 @@
-import { createApp, AppConfig } from 'vue';
+import { createApp } from 'vue';
 import Hotjar from './index';
 import { hotjarOptions } from './types/typing';
 
@@ -31,7 +31,7 @@ describe('Hotjar initialization', () => {
       });
       expect(window._hjSettings.hjid).toBe(12345678);
       expect(window._hjSettings.hjsv).toBe(6);
-    })
+    });
   });
 
   describe('Hotjar Development Mode', () => {

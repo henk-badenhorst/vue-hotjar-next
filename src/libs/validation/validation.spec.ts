@@ -4,7 +4,7 @@ import { hotjarOptions } from '../../types/typing';
 describe('HotJar Options Validation', () => {
   describe('id property', () => {
     it('ID should be valid', async () => {
-      await expect(validation.id(11111)).resolves.toEqual('valid')
+      await expect(validation.id(11111)).resolves.toEqual('valid');
     });
     it('ID should not be valid', async () => {
       await expect(validation.id('11111')).rejects.toEqual(
@@ -20,7 +20,7 @@ describe('HotJar Options Validation', () => {
 
   describe('idProduction property', () => {
     it('idProduction should be valid', async () => {
-      await expect(validation.isProduction(true)).resolves.toEqual('valid')
+      await expect(validation.isProduction(true)).resolves.toEqual('valid');
     });
     it('idProduction should not be valid due to incorrect type', async () => {
       await expect(validation.isProduction('production')).rejects.toEqual(
@@ -44,15 +44,19 @@ describe('HotJar Options Validation', () => {
 describe('Vue Version Validation', () => {
   beforeEach(() => {
     spyOn(console, 'error');
-  })
-  it('Vue version should be valid', async () => {
-    await expect(validation.validateVueVersion('3')).resolves.toEqual(true)
   });
   it('Vue version should be valid', async () => {
-    const incorrectVersion = '2.1.1'
-    await expect(validation.validateVueVersion(incorrectVersion)).rejects.toEqual(false).then(() => {
-      expect(console.error).toHaveBeenCalledWith(`This plugin detected Vue version ${incorrectVersion} but requires Vue 3.x.x`)
-    })
+    await expect(validation.validateVueVersion('3')).resolves.toEqual(true);
+  });
+  it('Vue version should be valid', async () => {
+    const incorrectVersion = '2.1.1';
+    await expect(validation.validateVueVersion(incorrectVersion))
+      .rejects.toEqual(false)
+      .then(() => {
+        expect(console.error).toHaveBeenCalledWith(
+          `This plugin detected Vue version ${incorrectVersion} but requires Vue 3.x.x`
+        );
+      });
   });
 });
 
@@ -68,7 +72,7 @@ describe('HotJar Validator', () => {
     };
     await expect(
       validation.validateHotjarOptions(hotjarOptions)
-    ).resolves.toEqual(true)
+    ).resolves.toEqual(true);
   });
 
   it('should throw an error', async () => {
@@ -80,7 +84,7 @@ describe('HotJar Validator', () => {
     await expect(validation.validateHotjarOptions(hotjarOptions))
       .rejects.toEqual(false)
       .then(() => {
-        expect(console.error).toHaveBeenCalledTimes(1)
+        expect(console.error).toHaveBeenCalledTimes(1);
       });
   });
 });
