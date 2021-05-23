@@ -10,6 +10,7 @@
     "format": "prettier --write .",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --collect-coverage",
     "prepare": "husky install"
   },
   "main": "dist/index.js",

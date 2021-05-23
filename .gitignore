@@ -1,8 +1,9 @@
 # Dependency directories
 /node_modules
 
-# App generated directories
+# Generated directories
 /dist
+/coverage
 
 # OS generated files
 .DS_Store
