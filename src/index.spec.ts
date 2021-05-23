@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, AppConfig } from 'vue';
 import Hotjar from './index';
 import { hotjarOptions } from './types/typing';
 
@@ -27,18 +27,11 @@ describe('Hotjar initialization', () => {
     it('Hotjar should not be initialized', () => {
       newVueApplication({
         id: 12345678,
-        snippetVersion: 6,
-        isProduction: true
+        snippetVersion: 6
       });
-      console.log(window._hjSettings);
       expect(window._hjSettings.hjid).toBe(12345678);
       expect(window._hjSettings.hjsv).toBe(6);
-    });
-
-    it('Hotjar should default to production mode', () => {
-      newVueApplication({ id: 123456781, snippetVersion: 6 });
-      expect(window._hjSettings).toBeDefined();
-    });
+    })
   });
 
   describe('Hotjar Development Mode', () => {

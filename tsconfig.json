@@ -4,6 +4,7 @@
     "strict": true,
     "allowJs": false,
     "moduleResolution": "Node",
+    "esModuleInterop": true,
     "rootDir": "./",
     "outDir": "./dist/",
     "module": "ES6",
