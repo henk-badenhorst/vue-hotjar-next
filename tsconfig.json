@@ -6,8 +6,7 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "rootDir": "./",
-    "outDir": "./dist/",
-    "module": "ES6",
+    "outDir": "./dist/package",
     "target": "ES5",
     "lib": ["ES5", "DOM"]
   },
