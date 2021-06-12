@@ -38,21 +38,19 @@ jobs:
       - name: Unit Test
         run: npm run test
 
-  build: 
-    # Build & generate npm package tarball
-    - name: Build Package
-      run: npm run build
+      # Build & generate npm package tarball
+      - name: Build Package
+        run: npm run build
 
-    # Publish built artifact (not necessary, to be used in future) 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: vue-hotjar-next
-        path: dist/**/*
+      # Publish built artifact (not necessary, to be used in future) 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: vue-hotjar-next
+          path: dist/**/*
 
-  release: 
-    # Release the build npm package
-    - name: Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npm run release
+      # Release the package to npm registry
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run release
