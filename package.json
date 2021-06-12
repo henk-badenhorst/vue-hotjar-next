@@ -1,17 +1,19 @@
 {
   "name": "vue-hotjar-next",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Vue 3 Hotjar plugin",
   "scripts": {
     "start": "webpack --watch --config webpack.config.js",
     "build": "ts-node ./scripts/generate-module.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "npm run lint --fix",
-    "format": "prettier --write .",
+    "format": "prettier .",
+    "format:fix": "prettier --write .",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --collect-coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "semantic-release --dry-run --pkgRoot=dist/package/"
   },
   "main": "dist/package/index.js",
   "files": [
@@ -20,7 +22,7 @@
   "types": "dist/package/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henk-badenhorst/vue-hotjar-next.git"
+    "url": "https://github.com/henk-badenhorst/vue-hotjar-next.git"
   },
   "bugs": {
     "url": "https://github.com/henk-badenhorst/vue-hotjar-next/issues"
@@ -53,6 +55,7 @@
     "typescript": "^4.2.3",
     "vue": "^3.0.11",
     "webpack": "^5.25.1",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "semantic-release": "^17.4.3"
   }
 }
