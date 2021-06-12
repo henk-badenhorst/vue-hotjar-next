@@ -1,0 +1,9 @@
+# Dependency directories
+/node_modules
+
+# App generated directories
+/dist
+/coverage
+
+# Hotjar Snippet
+/src/hotjar.ts

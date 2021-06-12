@@ -1,14 +1,28 @@
 {
   "name": "vue-hotjar-next",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Vue 3 Hotjar plugin",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --watch --config webpack.config.js",
+    "build": "ts-node ./scripts/generate-module.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "npm run lint --fix",
+    "format": "prettier .",
+    "format:fix": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --collect-coverage",
+    "prepare": "husky install",
+    "release": "semantic-release --dry-run --pkgRoot=dist/package/"
   },
+  "main": "dist/package/index.js",
+  "files": [
+    "dist/package"
+  ],
+  "types": "dist/package/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henk-badenhorst/vue-hotjar-next.git"
+    "url": "https://github.com/henk-badenhorst/vue-hotjar-next.git"
   },
   "bugs": {
     "url": "https://github.com/henk-badenhorst/vue-hotjar-next/issues"
@@ -23,8 +37,25 @@
   ],
   "author": {
     "name": "Henk Badenhorst",
-    "email": "hello@henk.io",
     "url": "https://henk.io"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "chalk": "^4.1.1",
+    "eslint": "^7.22.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.3.0",
+    "ts-jest": "^26.5.5",
+    "ts-loader": "^8.0.18",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3",
+    "vue": "^3.0.11",
+    "webpack": "^5.25.1",
+    "webpack-cli": "^4.5.0",
+    "semantic-release": "^17.4.3"
+  }
 }
