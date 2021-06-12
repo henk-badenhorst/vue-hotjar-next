@@ -72,6 +72,10 @@ async function copyRequiredFiles(): Promise<void> {
     {
       source: '../package.json',
       destination: '../dist/package/package.json'
+    },
+    {
+      source: '../README.md',
+      destination: '../dist/package/README.md'
     }
   ];
   new Promise((resolve, reject) => {
