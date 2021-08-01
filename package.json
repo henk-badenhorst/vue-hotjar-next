@@ -13,13 +13,14 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --collect-coverage",
     "prepare": "husky install",
-    "release": "semantic-release --dry-run --pkgRoot=dist/package/"
+    "release": "semantic-release --pkgRoot=dist/package/"
   },
-  "main": "dist/package/index.js",
+  "main": "src/index.ts",
   "files": [
-    "dist/package"
+    "src/",
+    "scripts/"
   ],
-  "types": "dist/package/index.d.ts",
+  "types": "src/types/typing.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/henk-badenhorst/vue-hotjar-next.git"
