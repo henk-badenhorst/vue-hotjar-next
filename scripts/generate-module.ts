@@ -113,7 +113,7 @@ async function updatePackageJson() {
         ...JSON.parse(data),
         files: ['/'],
         main: 'index.js',
-        types: 'index.d.ts'
+        types: 'typing.d.ts'
       };
       // Remove unnecessary properties
       delete packageJson.scripts;
@@ -153,7 +153,7 @@ async function copyZip(fileName: string): Promise<void> {
     chalk.green('7. Copying generating NPM package to dist... ')
   );
   await utils
-    .promisify(child_process.exec)(`cp ./${fileName} ./dist/`, {
+    .promisify(child_process.exec)(`mv ./${fileName} ./dist/`, {
       encoding: 'utf8'
     })
     .then(() => {
