@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --collect-coverage",
     "prepare": "husky install",
-    "release": "semantic-release --pkgRoot=dist/package/"
+    "release": "semantic-release --pkgRoot=dist/package/ --branches='main'"
   },
   "main": "src/index.ts",
   "typings": "src/types/typing.d.ts",

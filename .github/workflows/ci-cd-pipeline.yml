@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  name: Quality Check
   quality-check:
     runs-on: ubuntu-latest
     steps:
