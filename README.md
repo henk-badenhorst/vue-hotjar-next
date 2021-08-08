@@ -21,22 +21,34 @@ npm install vue-hotjar-next
 Start using it in your Vue application.
 
 ```js
-// Code Here
+import { createApp } from 'vue'
+import App from './App.vue'
+import VueHotjar from 'vue-hotjar-next'
+
+const app = createApp(App);
+
+app.use(VueHotjar, {
+  id: 12345678,
+  isProduction: true,
+  snippetVersion: 6
+});
+
+app.mount("#app");
 ```
 
 ## Parameters
 
-### Id:
+### id:
 
-Your Hotjar Site ID is a required parameter. You can find this ID at insights.hotjar.com under tracking.
+Your Hotjar Site ID is a required parameter with a type of number. You can find this ID at insights.hotjar.com under tracking.
 
 ```js 
-id: 'XXXXXXX' 
+id: 12345678
 ```
 
 ### isProduction:
 
-If you would like to disable or enable tracking, pass in either `true` or `false`. It is advised to bind your Node ENV variable. This is an optional parameter and will default to true if not specified.
+If you would like to disable or enable tracking this parameter is of type boolean. It is advised to bind your Node ENV variable. This is an optional parameter and will default to `true` if not defined.
 
 ```js 
 isProduction: true 
@@ -44,13 +56,12 @@ isProduction: true
 
 ### snippetVersion:
 
-This optional parameter does not need to be specified as it will default to the latest Hotjar Snippet version. Currently, it will default to `version 6`.
+This optional parameter that will default to the latest Hotjar Snippet version. Currently, it will default to version `6`. This parameter is of type number.
 
 ```js 
 snippetVersion: 6 
 ```
 
-## Vue Version Compatibility
+## Vue Compatibility
 
 This plugin is specifically intended for use with Vue version 3. If you are using Vue version 2 please see [vue-hotjar](https://www.npmjs.com/package/vue-hotjar).
-
