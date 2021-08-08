@@ -39,7 +39,7 @@ jobs:
 
       # Build & generate npm package tarball
       - name: Build Package
-        run: npm run build
+        run: npm run generate-module
 
       # Publish built artifact (not necessary, to be used in future) 
       - uses: actions/upload-artifact@v2

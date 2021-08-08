@@ -7,3 +7,6 @@
 
 # Hotjar Snippet
 /src/hotjar.ts
+
+# Webpack Config
+/webpack.config.js

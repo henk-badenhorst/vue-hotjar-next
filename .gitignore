@@ -4,6 +4,7 @@
 # Generated directories
 /dist
 /coverage
+/*.tgz
 
 # OS generated files
 .DS_Store

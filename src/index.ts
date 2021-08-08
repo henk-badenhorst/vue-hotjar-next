@@ -6,13 +6,13 @@ import {
   validateVueVersion
 } from './libs/validation/validation';
 
-const hotjar: Plugin = {
+ const VueHotjar: Plugin = {
   install: (app: App, options: hotjarOptions) => {
     const { id, snippetVersion = 6, isProduction = true } = options;
-    if (validateHotjarOptions(options) && validateVueVersion(app.version)) {
+    if (validateHotjarOptions({ id, snippetVersion, isProduction }) && validateVueVersion(app.version)) {
       new Hotjar(id, snippetVersion, isProduction);
     }
   }
 };
 
-export default hotjar;
+export default VueHotjar

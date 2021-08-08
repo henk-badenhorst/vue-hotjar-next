@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
     "strict": true,
-    "allowJs": false,
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "rootDir": "./",
-    "outDir": "./dist/package",
+    "module": "commonjs",
     "target": "ES5",
-    "lib": ["ES5", "DOM"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
