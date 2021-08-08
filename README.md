@@ -66,9 +66,3 @@ snippetVersion: 6
 ## Vue Compatibility
 
 This plugin is specifically intended for use with Vue version 3. If you are using Vue version 2 please see [vue-hotjar](https://www.npmjs.com/package/vue-hotjar).
-=======
-*Instructions to be added shortly...*
-
-## Supported Vue Versions
-
-* Vue ^3.0.0
