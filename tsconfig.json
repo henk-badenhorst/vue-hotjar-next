@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
     "strict": true,
-    "allowJs": false,
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "rootDir": "./",
-    "outDir": "./dist/package",
-    "target": "ES5",
-    "lib": ["ES5", "DOM"]
+    "module": "commonjs",
+    "target": "es2015",
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

@@ -4,7 +4,7 @@
   "description": "Vue 3 Hotjar plugin",
   "scripts": {
     "start": "webpack --watch --config webpack.config.js",
-    "build": "ts-node ./scripts/generate-module.ts",
+    "generate-module": "ts-node --project=./scripts/tsconfig.json ./scripts/generate-module.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "npm run lint --fix",
     "format": "prettier .",
@@ -16,11 +16,11 @@
     "release": "semantic-release --pkgRoot=dist/package/"
   },
   "main": "src/index.ts",
+  "typings": "src/types/typing.d.ts",
   "files": [
     "src/",
     "scripts/"
   ],
-  "types": "src/types/typing.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/henk-badenhorst/vue-hotjar-next.git"

@@ -111,9 +111,9 @@ async function updatePackageJson() {
     .then(async (data: any) => {
       const packageJson = {
         ...JSON.parse(data),
-        files: ['/'],
+        files: ['*'],
         main: 'index.js',
-        types: 'typing.d.ts'
+        typings: 'typing.d.ts'
       };
       // Remove unnecessary properties
       delete packageJson.scripts;

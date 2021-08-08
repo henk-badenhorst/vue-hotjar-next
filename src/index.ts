@@ -9,7 +9,7 @@ import {
 const hotjar: Plugin = {
   install: (app: App, options: hotjarOptions) => {
     const { id, snippetVersion = 6, isProduction = true } = options;
-    if (validateHotjarOptions(options) && validateVueVersion(app.version)) {
+    if (validateHotjarOptions({ id, snippetVersion, isProduction }) && validateVueVersion(app.version)) {
       new Hotjar(id, snippetVersion, isProduction);
     }
   }
