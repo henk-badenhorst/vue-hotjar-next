@@ -46,10 +46,6 @@ jobs:
         with:
           name: vue-hotjar-next
           path: dist/**/*
-      
-      # Check if report exists 
-      - name: Check If Report Exists
-        run: ls && ls ./coverage
 
       # Publish the test Coverage report to codecov.com
       - name: Upload Code Coverage Report
