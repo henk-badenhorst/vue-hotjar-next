@@ -3,13 +3,29 @@
   <br>
   <br>
   <span>
-    <img src="https://img.shields.io/npm/dt/vue-hotjar-next.svg"> 
+    <span>
+      <a href="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci-cd-pipeline.yml?query=branch%3Amain">
+        <img alt="test" src="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci-cd-pipeline.yml/badge.svg?branch=main">
+      </a>
+    </span>
+    &nbsp;
+    <span>
+      <a href="https://codecov.io/gh/henk-badenhorst/vue-hotjar-next">
+        <img src="https://codecov.io/gh/henk-badenhorst/vue-hotjar-next/branch/main/graph/badge.svg?token=7DMN7ERZS6"/>
+      </a>
+    </span>
+    &nbsp;
+    <span>
+      <a href="https://v3.vuejs.org">
+        <img src="https://badgen.net/badge/vue.js/3.x.x/41b883"/>
+      </a>
+    </span>
   </span>
-  &nbsp;
+  <br>
+  <br>
 </p>
 
 # Vue Hotjar Next
-
 
 This is a Vue 3.x.x plugin that will allow you to easily add Hotjar to any Vue project. 
 
