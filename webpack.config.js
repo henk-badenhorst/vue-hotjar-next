@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/package'),
     filename: 'index.js',
     libraryTarget: 'umd',
+    globalObject: 'this',
     umdNamedDefine: true
   },
   resolve: {
