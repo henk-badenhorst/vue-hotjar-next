@@ -1,8 +1,8 @@
-import fs from 'fs/promises';
-import path from 'path';
-import utils from 'util';
-import child_process from 'child_process';
 import chalk from 'chalk';
+import { exec } from 'child_process';
+import { copyFile, exists, mkdir, readJSON, rm, writeJSON } from 'fs-extra';
+import { join, resolve } from 'path';
+import { promisify } from 'util';
 
 const startTime: number = Date.now();
 
@@ -13,156 +13,97 @@ async function isCompleted(isCompleted: boolean) {
     process.stdout.write(chalk.red.bold('Failed \n'));
   }
 }
+
+const distRootPath = resolve('dist');
+const distPackageRootPath = join(distRootPath, 'package');
+
 // Clear current dist
 async function clearBuild() {
-  process.stdout.write(chalk.green('1. Clearing current build... '));
-  await fs
-    .rmdir(path.resolve(path.resolve(__dirname, '../'), 'dist'), {
-      recursive: true
-    })
-    .then(() => {
-      isCompleted(true);
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
+  try {
+    process.stdout.write(chalk.green('1. Clearing current build... '));
+    if (await exists(distRootPath)) {
+      await rm(distRootPath, { recursive: true });
+    }
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Generate directory structure
 async function createDirStructure() {
-  process.stdout.write(chalk.green('2. Creating a directory structure... '));
-  await fs
-    .mkdir(path.resolve(path.resolve(__dirname, '../'), 'dist/package'), {
-      recursive: true
-    })
-    .then(() => {
-      isCompleted(true);
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
+  try {
+    process.stdout.write(chalk.green('2. Creating a directory structure... '));
+    await mkdir(distPackageRootPath, { recursive: true });
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Run webpack to compile TypeScript & minify
 async function runWebpackBuild() {
-  process.stdout.write(chalk.green('3. Building with Webpack... '));
-  await utils
-    .promisify(child_process.exec)('npx webpack --config webpack.config.js', {
+  try {
+    process.stdout.write(chalk.green('3. Building with Webpack... '));
+    await promisify(exec)('npm run build', {
       encoding: 'utf8'
     })
-    .then(() => {
-      isCompleted(true);
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Copy required files to dist
 async function copyRequiredFiles(): Promise<void> {
-  process.stdout.write(chalk.green('4. Copying required file... '));
-  const files = [
-    {
-      source: '../src/types/typing.d.ts',
-      destination: '../dist/package/typing.d.ts'
-    },
-    {
-      source: '../package.json',
-      destination: '../dist/package/package.json'
-    },
-    {
-      source: '../README.md',
-      destination: '../dist/package/README.md'
-    }
-  ];
-  new Promise((resolve, reject) => {
-    try {
-      files.forEach(async (data) => {
-        await fs
-          .copyFile(
-            path.resolve(__dirname, data.source),
-            path.resolve(__dirname, data.destination)
-          )
-          .catch((error) => {
-            throw new Error(error);
-          });
-      });
-      isCompleted(true);
-      resolve;
-    } catch {
-      isCompleted(false);
-      reject;
-    }
-  });
+  try {
+    process.stdout.write(chalk.green('4. Copying required file... '));
+    await copyFile('./src/types/typing.d.ts', './dist/package/typing.d.ts');
+    await copyFile('./package.json', './dist/package/package.json');
+    await copyFile('./README.md', './dist/package/README.md');
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Correct package.json paths & clear dependencies
 async function updatePackageJson() {
-  process.stdout.write(chalk.green('5. Formatting package.json file... '));
-  const packageJsonPath = path.resolve(
-    path.resolve(__dirname, '../'),
-    'dist/package/package.json'
-  );
-  await fs
-    .readFile(packageJsonPath, { encoding: 'utf8' })
-    .then(async (data: any) => {
-      const packageJson = {
-        ...JSON.parse(data),
-        files: ['*'],
-        main: 'index.js',
-        typings: 'typing.d.ts'
-      };
-      // Remove unnecessary properties
-      delete packageJson.scripts;
-      delete packageJson.devDependencies;
-
-      await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    })
-    .then(() => {
-      isCompleted(true);
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
+  try {
+    process.stdout.write(chalk.green('5. Formatting package.json file... '));
+    const packageJsonPath = join(distPackageRootPath, 'package.json');
+    const packageJson = {
+      ...await readJSON(packageJsonPath),
+      files: ['*'],
+      main: 'index.js',
+      typings: 'typing.d.ts'
+    };
+    delete packageJson.scripts;
+    delete packageJson.devDependencies;
+    await writeJSON(packageJsonPath, packageJson, { spaces: 2 });
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Build the package
 async function generatePackage(): Promise<void> {
-  process.stdout.write(chalk.green('6. Generating NPM package...'));
-  await utils
-    .promisify(child_process.exec)('npm pack ./dist/package/', {
+  try {
+    process.stdout.write(chalk.green('6. Generating NPM package...'));
+    await promisify(exec)('npm pack ./dist/package/ --pack-destination ./dist', {
       encoding: 'utf8'
     })
-    .then(async (data) => {
-      isCompleted(true);
-      await copyZip(data.stdout.trim());
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
-}
-
-// Copy generated package from the root to the dist dir
-async function copyZip(fileName: string): Promise<void> {
-  process.stdout.write(
-    chalk.green('7. Copying generating NPM package to dist... ')
-  );
-  await utils
-    .promisify(child_process.exec)(`mv ./${fileName} ./dist/`, {
-      encoding: 'utf8'
-    })
-    .then(() => {
-      isCompleted(true);
-    })
-    .catch((error) => {
-      isCompleted(false);
-      throw new Error(error);
-    });
+    isCompleted(true);
+  } catch (error) {
+    isCompleted(false);
+    throw error
+  }
 }
 
 // Generation completion output
