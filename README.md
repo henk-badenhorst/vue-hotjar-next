@@ -4,8 +4,8 @@
   <br>
   <span>
     <span>
-      <a href="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci-cd-pipeline.yml?query=branch%3Amain">
-        <img alt="test" src="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci-cd-pipeline.yml/badge.svg?branch=main">
+      <a href="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci.yml/badge.svg?branch=main">
+        <img alt="test" src="https://github.com/henk-badenhorst/vue-hotjar-next/actions/workflows/ci.yml/badge.svg?branch=main">
       </a>
     </span>
     &nbsp;
