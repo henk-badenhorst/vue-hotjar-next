@@ -1,11 +1,12 @@
 {
   "name": "vue-hotjar-next",
-  "version": "0.0.0-development",
+  "version": "1.4.0",
   "description": "Vue 3 Hotjar plugin",
   "scripts": {
     "start": "webpack --watch --config webpack.config.js",
     "generate-module": "ts-node --project=./scripts/tsconfig.json ./scripts/generate-module.ts",
-    "lint": "eslint . --ext .ts",
+    "build": "webpack --config webpack.config.js",
+    "lint": "eslint .",
     "lint:fix": "npm run lint --fix",
     "format": "prettier .",
     "format:fix": "prettier --write .",
@@ -13,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --collect-coverage",
     "prepare": "husky install",
-    "release": "semantic-release --pkgRoot=dist/package/ --branches='main'"
+    "release": "semantic-release --dry-run --pkgRoot=dist/package/ --branches='main'"
   },
   "main": "src/index.ts",
   "typings": "src/types/typing.d.ts",
@@ -42,21 +43,27 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/jest": "^26.0.22",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "chalk": "^4.1.1",
     "eslint": "^7.22.0",
+    "fs-extra": "^11.2.0",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "prettier": "^2.3.0",
+    "semantic-release": "^22.0.12",
     "ts-jest": "^26.5.5",
     "ts-loader": "^8.0.18",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
-    "vue": "^3.0.11",
+    "vue": "^3.3.11",
     "webpack": "^5.25.1",
-    "webpack-cli": "^4.5.0",
-    "semantic-release": "^17.4.3"
+    "webpack-cli": "^4.5.0"
   }
 }

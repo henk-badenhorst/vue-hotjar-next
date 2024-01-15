@@ -4,7 +4,6 @@ export class Hotjar {
     if (isProduction) {
       // Default hotjar.com snippet
       (function (h, o, t, j, a, r) {
-        // eslint-disable-next-line prefer-rest-params
         h.hj =
           h.hj ||
           function () {
