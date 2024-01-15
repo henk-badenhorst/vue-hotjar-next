@@ -1,15 +1,15 @@
-import { hotjarOptions } from '../../types/typing';
+import { HotjarOptions } from '../../types/typing';
 import { App } from '@vue/runtime-core';
 
 /**
  * Validate if all the options are of the correct type and are valid. If not, they will print a console error and return false.
  *
- * @param {hotjarOptions} options - Hotjar options
+ * @param {HotjarOptions} options - Hotjar options
  * @return {boolean} - Returns true if all options are valid
  *
  */
 export function isHotjarOptionsValid(
-  options: hotjarOptions
+  options: HotjarOptions
 ): boolean {
 
   // check if isProduction option is of type boolean

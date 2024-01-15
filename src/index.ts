@@ -1,13 +1,13 @@
 import { Hotjar } from './libs/hotjar/hotjar';
-import { App, Plugin } from '@vue/runtime-core';
-import { hotjarOptions } from './types/typing';
+import { App } from '@vue/runtime-core';
+import { HotjarOptions } from './types/typing';
 import {
   isHotjarOptionsValid,
   isVueVersionValid
 } from './libs/validation/validation';
 
- const VueHotjar: Plugin = {
-  install: async (app: App, options: hotjarOptions) => {
+export default {
+  install: (app: App, options: HotjarOptions) => {
 
     // set default option for the sippetVersion if it is not provided
     if (options.snippetVersion === undefined) {
@@ -19,11 +19,8 @@ import {
       options.isProduction = true;
     }
 
-    if(isHotjarOptionsValid(options) && isVueVersionValid(app)) {
-      app.config.globalProperties.$hj = new Hotjar(options.id, options.snippetVersion, options.isProduction);
+    if (isHotjarOptionsValid(options) && isVueVersionValid(app)) {
+      new Hotjar(options.id, options.snippetVersion, options.isProduction);
     }
-
   }
 };
-
-export default VueHotjar

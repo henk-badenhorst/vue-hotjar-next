@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import Hotjar from './index';
-import { hotjarOptions } from './types/typing';
+import { HotjarOptions } from './types/typing';
 
 declare global {
   interface Window {
@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-function newVueApplication(options: hotjarOptions) {
+function newVueApplication(options: HotjarOptions) {
   return createApp({}).use(Hotjar, options).mount;
 }
 

@@ -1,6 +1,6 @@
 import { App } from 'vue';
 
-export interface hotjarOptions {
+export interface HotjarOptions {
   /**
    * Your Hotjar Site ID is a required parameter. You can find this ID at [insights.hotjar.com](https://insights.hotjar.com).
    */
@@ -21,9 +21,8 @@ export interface hotjarOptions {
   snippetVersion?: number;
 }
 
-export default class HotjarPlugin {
-  static install(
-    app: App,
-    options: hotjarOptions
-  ): void;
-}
+declare const HotjarPlugin: {
+  install: (app: App, options: HotjarOptions) => void;
+};
+
+export { HotjarPlugin as default };
