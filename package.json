@@ -1,6 +1,6 @@
 {
   "name": "vue-hotjar-next",
-  "version": "0.0.0-development",
+  "version": "1.4.0",
   "description": "Vue 3 Hotjar plugin",
   "scripts": {
     "start": "webpack --watch --config webpack.config.js",
@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --collect-coverage",
     "prepare": "husky install",
-    "release": "semantic-release --pkgRoot=dist/package/ --branches='main'"
+    "release": "semantic-release --dry-run --pkgRoot=dist/package/ --branches='main'"
   },
   "main": "src/index.ts",
   "typings": "src/types/typing.d.ts",
@@ -43,6 +43,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^26.0.22",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
