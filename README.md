@@ -79,6 +79,18 @@ This optional parameter that will default to the latest Hotjar Snippet version. 
 snippetVersion: 6 
 ```
 
+## Accessing The Hotjar API
+
+Instead of accessing Hotjar API's through the window object like `window.hj` you can simply interact with the Hotjar API via Vue global properties. 
+
+### Identify API
+
+Hotjar’s Identify API allows you to pass data about your users to Hotjar using Javascript. Instead of using the `window.hj` method to access the API this plugin binds the window.hj API to a global property that can be accessed as follow: `app.config.globalProperties.$hj`
+
+### Settings
+
+Hotjar also binds the settings such as the Hotjar ID and snippet version to `window._hjSettings` property. You can also access this through a global with `app.config.globalProperties.$hjSettings`.
+
 ## Vue Compatibility
 
 This plugin is specifically intended for use with Vue version 3. If you are using Vue version 2 please see [vue-hotjar](https://www.npmjs.com/package/vue-hotjar).

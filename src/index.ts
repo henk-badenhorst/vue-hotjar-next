@@ -6,6 +6,13 @@ import {
   isVueVersionValid
 } from './libs/validation/validation';
 
+declare global {
+  interface Window {
+    hj: any;
+    _hjSettings: any;
+  }
+}
+
 export default {
   install: (app: App, options: HotjarOptions) => {
 
@@ -21,6 +28,10 @@ export default {
 
     if (isHotjarOptionsValid(options) && isVueVersionValid(app)) {
       new Hotjar(options.id, options.snippetVersion, options.isProduction);
+      if (window.hj) {
+        app.config.globalProperties.$hj = window.hj;
+        app.config.globalProperties.$hjSettings = window._hjSettings;
+      }
     }
   }
 };

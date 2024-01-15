@@ -1,56 +1,52 @@
 import { createApp } from 'vue';
 import Hotjar from './index';
-import { HotjarOptions } from './types/typing';
 
 declare global {
   interface Window {
+    hj: any;
     _hjSettings: any;
   }
 }
 
-function newVueApplication(options: HotjarOptions) {
-  return createApp({}).use(Hotjar, options).mount;
-}
+describe('Hotjar Plugin', () => {
 
-describe('Hotjar initialization', () => {
   beforeEach(() => {
     spyOn(console, 'log');
     spyOn(console, 'error');
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    delete window.hj;
     delete window._hjSettings;
+    jest.resetAllMocks();
+    jest.clearAllMocks()
   });
 
-  describe('Hotjar Production Mode', () => {
-    it('Hotjar should not be initialized', () => {
-      newVueApplication({
-        id: 12345678,
-        snippetVersion: 6
-      });
-      expect(window._hjSettings.hjid).toBe(12345678);
-      expect(window._hjSettings.hjsv).toBe(6);
+  it('Hotjar should be initialized', () => {
+    const app = createApp({});
+    app.use(Hotjar, {
+      id: 12345678,
+      snippetVersion: 6
     });
+    expect(window._hjSettings.hjid).toEqual(12345678);
+    expect(window._hjSettings.hjsv).toEqual(6);
+    expect(app.config.globalProperties.$hj).toBeDefined();
+    expect(app.config.globalProperties.$hjSettings).toEqual({ hjid: 12345678, hjsv: 6 });
   });
-
-  describe('Hotjar Development Mode', () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-      delete window._hjSettings;
+  it('Hotjar should not be initialized and print a console message', () => {
+    const app = createApp({});
+    app.use(Hotjar, {
+      id: 12345678,
+      snippetVersion: 6,
+      isProduction: false
     });
-
-    it('Hotjar should not be initialized', () => {
-      newVueApplication({
-        id: 12345678,
-        snippetVersion: 6,
-        isProduction: false
-      });
-      expect(window._hjSettings).not.toBeDefined();
-      expect(console.log).toHaveBeenCalledWith(
-        '%c 🔥 HotJar Tracking Disabled 🔥',
-        'color: #fff; background: #35495d; font-size: 14px; border-radius: 5px; padding: 10px 5px; margin: 20px 0;'
-      );
-    });
+    expect(window._hjSettings).not.toBeDefined();
+    expect(app.config.globalProperties.$hj).not.toBeDefined();
+    expect(app.config.globalProperties.$hjSettings).not.toBeDefined();
+    expect(console.log).toHaveBeenCalledWith(
+      '%c 🔥 HotJar Tracking Disabled 🔥',
+      'color: #fff; background: #35495d; font-size: 14px; border-radius: 5px; padding: 10px 5px; margin: 20px 0;'
+    );
   });
 });
+
