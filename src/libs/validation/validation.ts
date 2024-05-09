@@ -31,9 +31,9 @@ export function isHotjarOptionsValid(
   }
 
   // check if id option is of type number
-  if (typeof options.id !== 'number') {
+  if (typeof options.id !== 'number' || typeof options.id !== 'string') {
     console.error(
-      `vue-hotjar-next: Hotjar option site id is of type ${typeof options.id} and should a number`
+      `vue-hotjar-next: Hotjar option site id is of type ${typeof options.id} and should be a number or string`
     );
     return false
   }
@@ -50,7 +50,7 @@ export function isHotjarOptionsValid(
  *
  */
 export function isVueVersionValid(app: App): boolean {
-  
+
   if (app.version[0] !== '3') {
     console.error(
       `vue-hotjar-next: This plugin is intended to be used with Vue version 3. Version ${app.version} was detected.`

@@ -11,9 +11,9 @@ describe('validation', () => {
   })
   it('isHotjarOptionsValid should print an error that the option ID is invalid', () => {
     const validationResult = isHotjarOptionsValid({
-      id: '11111',
+      id: 11111.111,
     } as any)
-    expect(console.error).toHaveBeenCalledWith('vue-hotjar-next: Hotjar option site id is of type string and should a number');
+    expect(console.error).toHaveBeenCalledWith('vue-hotjar-next: Hotjar option site id is of type float and should a number or string');
     expect(validationResult).toBeFalsy();
   });
 
@@ -47,6 +47,14 @@ describe('validation', () => {
   it('isHotjarOptionsValid should be valid', () => {
     const validationResult = isHotjarOptionsValid({
       id: 11111,
+    })
+    expect(console.error).not.toHaveBeenCalled();
+    expect(validationResult).toBeTruthy();
+  });
+
+    it('isHotjarOptionsValid should be valid as a string', () => {
+    const validationResult = isHotjarOptionsValid({
+      id: '11111',
     })
     expect(console.error).not.toHaveBeenCalled();
     expect(validationResult).toBeTruthy();
