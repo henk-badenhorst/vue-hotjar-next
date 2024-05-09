@@ -31,7 +31,7 @@ export function isHotjarOptionsValid(
   }
 
   // check if id option is of type number
-  if (typeof options.id !== 'number' || typeof options.id !== 'string') {
+  if (typeof options.id !== 'number' && typeof options.id !== 'string') {
     console.error(
       `vue-hotjar-next: Hotjar option site id is of type ${typeof options.id} and should be a number or string`
     );
