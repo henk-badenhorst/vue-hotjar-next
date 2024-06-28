@@ -4,7 +4,7 @@ export interface HotjarOptions {
   /**
    * Your Hotjar Site ID is a required parameter. You can find this ID at [insights.hotjar.com](https://insights.hotjar.com).
    */
-  id: number;
+  id: number | string;
 
   /**
    * If you would like to disable or enable tracking, pass in either `true` or `false`. Ideally you want to set this to prevent unintentional tracking during local development.
