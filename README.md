@@ -57,7 +57,7 @@ app.mount("#app");
 
 ### id:
 
-Your Hotjar Site ID is a required parameter with a type of number. You can find this ID at insights.hotjar.com under tracking.
+Your Hotjar Site ID is a required parameter, this can be of type string or number. You can find this ID [here](insights.hotjar.com) under tracking.
 
 ```js 
 id: 12345678

@@ -27,8 +27,8 @@ export default {
     }
 
     if (isHotjarOptionsValid(options) && isVueVersionValid(app)) {
-      const HotjarId = typeof options.id === 'string' ? parseInt(options.id) : options.id;
-      new Hotjar(HotjarId, options.snippetVersion, options.isProduction);
+      const hotjarId = typeof options.id === 'string' ? parseInt(options.id) : options.id;
+      new Hotjar(hotjarId, options.snippetVersion, options.isProduction);
       if (window.hj) {
         app.config.globalProperties.$hj = window.hj;
         app.config.globalProperties.$hjSettings = window._hjSettings;
